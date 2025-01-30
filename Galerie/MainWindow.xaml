@@ -1,0 +1,78 @@
+﻿<Window x:Class="Galerie.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Galerie"
+        mc:Ignorable="d"
+        Title="Galerie" Height="600" Width="965">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="250" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="10"/>
+        </Grid.RowDefinitions>
+
+        <Menu Grid.Row="0" Grid.ColumnSpan="2">
+            <MenuItem Header="Soubor">
+                <MenuItem Header="Info" Click="Info_Click"/>
+                <Separator/>
+                <MenuItem Header="zrušit výběr" Click="Unselect_Click"/>
+                <Separator/>
+                <MenuItem Header="smazat obrázek" Click="Delete_Click"/>
+                <MenuItem Header="klonovat obrázek" Click="Clone_Click"/>
+            </MenuItem>
+            <MenuItem Header="Úpravy">
+                <MenuItem Header="otočit doprava o 90 stupňů" Click="Rotate90_Click"/>
+                <MenuItem Header="otočit doleva o 90 stupňů" Click="RotateMinus90_Click"/>
+                <MenuItem Header="otočit o 180 stupňů" Click="Rotate180_Click"/>
+                <MenuItem Header="překlopit X" Click="FlipX_Click"/>
+                <MenuItem Header="překlopit Y" Click="FlipY_Click"/>
+                <Separator/>
+                <MenuItem Header="stupně šedi" Click="Grayscale_Click"/>
+            </MenuItem>
+            <MenuItem Header="Zobrazení">
+                <MenuItem Header="malé náhledy" Click="Small_Click"/>
+                <MenuItem Header="střední náhledy" Click="Medium_Click"/>
+                <MenuItem Header="velké náhledy" Click="Large_Click"/>
+                <MenuItem Header="obrovské náhledy" Click="Huge_Click"/>
+            </MenuItem>
+            <MenuItem Header="Tisk" Click="Print_Click"/>
+        </Menu>
+
+        <!-- Vstup na cestu -->
+        <StackPanel Orientation="Horizontal" Grid.Row="1" Height="27">
+            <Button Content="Vybrat složku" Margin="15,0,0,0" Click="SelectPath_Click"/>
+            <TextBox x:Name="DirectoryTextBox" Width="428" Text="C:\" TextChanged="DirectoryTextBox_TextChanged"/>
+            <ComboBox x:Name="Order" Width="164" Margin="10,0,0,0" SelectionChanged="Order_SelectionChanged">
+                <ComboBoxItem Content="název vzestupně"/>
+                <ComboBoxItem Content="název sestupně"/>
+                <ComboBoxItem Content="čas úpravy vzestupně"/>
+                <ComboBoxItem Content="čas úpravy sestupně" IsSelected="True"/>
+                <ComboBoxItem Content="čas vytvoření vzestupně"/>
+                <ComboBoxItem Content="čas vytvoření sestupně"/>
+                <ComboBoxItem Content="velikost vzestupně"/>
+                <ComboBoxItem Content="velikost sestupně"/>
+            </ComboBox>
+        </StackPanel>
+
+
+        <!-- Obrázky -->
+        <ScrollViewer Grid.Column="0" Margin="10,0,0,0" Grid.Row="2">
+            <WrapPanel x:Name="ImagesWrapPanel"/>
+        </ScrollViewer>
+
+        <!-- Náhled a Metadata -->
+        <StackPanel Margin="10,0,10,0" Grid.Row="1" Grid.Column="1" Grid.RowSpan="2">
+            <TextBlock Text="Náhled" FontWeight="Bold" FontSize="16" />
+            <Image x:Name="Preview" Height="230" Width="230" Margin="0,20,0,0"/>
+            <TextBlock Text="Metadata" FontWeight="Bold" FontSize="16" />
+            <TextBlock x:Name="MetadataTextBlock" TextWrapping="Wrap" Margin="0,20,0,0" />
+        </StackPanel>
+    </Grid>
+</Window>
